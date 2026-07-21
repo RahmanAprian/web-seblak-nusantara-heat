@@ -1,0 +1,16 @@
+# Backend (Laravel)
+/backend/vendor
+/backend/.env
+/backend/database/database.sqlite
+/backend/storage/*.key
+/backend/public/storage
+/backend/.phpunit.result.cache
+
+# Frontend (React)
+/frontend/node_modules
+/frontend/dist
+/frontend/.env
+
+# Umum
+.DS_Store
+Thumbs.db
