@@ -13,4 +13,4 @@ RUN composer install --optimize-autoloader --no-dev --no-interaction
 
 EXPOSE 8080
 
-CMD php artisan migrate --seed --force; exec php artisan serve --host=0.0.0.0 --port=8080
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8080"]
