@@ -15,25 +15,29 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Akun admin default
-        User::create([
-            'name' => 'Admin Seblak',
-            'email' => 'admin@seblak.test',
-            'no_hp' => '081200000000',
-            'alamat' => 'Kantor Pusat Seblak Nusantara Heat',
-            'password' => Hash::make('password123'),
-            'role' => 'admin',
-        ]);
+        // Akun admin default (aman dijalankan berkali-kali, gak akan duplikat)
+        User::firstOrCreate(
+            ['email' => 'admin@seblak.test'],
+            [
+                'name' => 'Admin Seblak',
+                'no_hp' => '081200000000',
+                'alamat' => 'Kantor Pusat Seblak Nusantara Heat',
+                'password' => Hash::make('password123'),
+                'role' => 'admin',
+            ]
+        );
 
         // Akun pelanggan contoh
-        User::create([
-            'name' => 'Pelanggan Contoh',
-            'email' => 'pelanggan@seblak.test',
-            'no_hp' => '081211112222',
-            'alamat' => 'Jl. Contoh No. 1, Palembang',
-            'password' => Hash::make('password123'),
-            'role' => 'customer',
-        ]);
+        User::firstOrCreate(
+            ['email' => 'pelanggan@seblak.test'],
+            [
+                'name' => 'Pelanggan Contoh',
+                'no_hp' => '081211112222',
+                'alamat' => 'Jl. Contoh No. 1, Palembang',
+                'password' => Hash::make('password123'),
+                'role' => 'customer',
+            ]
+        );
 
         // Menu seblak
         $products = [
@@ -88,7 +92,10 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($products as $product) {
-            Product::create($product);
+            Product::firstOrCreate(
+                ['name' => $product['name']],
+                $product
+            );
         }
 
         // Bahan baku
@@ -104,7 +111,10 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($ingredients as $ingredient) {
-            Ingredient::create($ingredient);
+            Ingredient::firstOrCreate(
+                ['name' => $ingredient['name']],
+                $ingredient
+            );
         }
     }
 }
